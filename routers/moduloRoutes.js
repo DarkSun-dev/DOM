@@ -1,0 +1,12 @@
+const express = require('express')
+const moduloController = require('./../controllers/moduloController')
+const authController = require('./../controllers/authController')
+const router = express.Router()
+router.use(authController.protect)
+router.post('/postCode', moduloController.createValidate)
+router.get('/validate', moduloController.setValidate)
+router.get('/validateAll', moduloController.getCodes)
+router.post('/registarModulo', moduloController.registarModulo)
+router.get('/getAll', moduloController.getModulos)
+router.get('/getOne', moduloController.getModulo)
+module.exports = router
