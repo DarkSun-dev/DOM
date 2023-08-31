@@ -14,7 +14,7 @@ const moduloSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    description: {
+    descri: {
         type: String,
         trim: true,
         required: true

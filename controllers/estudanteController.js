@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const myReport = require('../utils/reports/inscriptReport')
 const Caderneta = require('../utils/reports/caderneta')
 
+
 exports.inscreverEstudante = async (req, res, next) => {
     var showM = []
     const doc = await Inscript.create(req.body.inscript_data)
@@ -70,13 +71,20 @@ exports.getStudents = async (req, res, next) => {
     next()
 }
 exports.cadastrarEstudante = async (req, res, next) => {
-    const doc = await Estudante.create(req.body);
-    res.status(201).json({
-        status: 'success',
-        data: {
-            data: doc
+    try {
+        const doc = await Estudante.create(req.body);
+        res.status(201).json({
+            status: 'success',
+            data: {
+                data: doc
+            }
+        })
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            return res.send({ status: 'error', log: error })
         }
-    })
+        res.send(error)
+    }
     next()
 }
 

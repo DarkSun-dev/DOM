@@ -1,7 +1,25 @@
 const Modulo = require('../models/moduloModel')
 const Validator = require('../models/validatorModel')
 const factory = require('./handlerFactory')
-exports.registarModulo = factory.createOne(Modulo)
+
+exports.registarModulo = async (req, res, next) => {
+  try {
+      const doc = await Modulo.create(req.body);
+      res.status(201).json({
+          status: 'success',
+          data: {
+              data: doc
+          }
+      })
+  } catch (error) {
+      if (error.name === "ValidationError") {
+          return res.send({ status: 'error', log: error })
+      }
+      res.send(error)
+  }
+  next()
+}
+
 exports.getModulos = factory.getAll(Modulo)
 exports.getModulo = async (req, res, next) => {
   const doc = await Modulo.find({ curso: req.query.curso, nivel: req.query.nivel })
