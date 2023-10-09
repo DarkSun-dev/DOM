@@ -37,14 +37,7 @@ const createSendToken = (user, statusCode, res) => {
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const newUser = await User.create({
-    username: req.body.username,
-    email: req.body.email,
-    role: req.body.role,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm
-  })
-
+  const newUser = await User.create(req.body)
   createSendToken(newUser, 201, res)
 })
 
@@ -216,7 +209,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   const credencias = await ResetPassword.deleteOne({email: req.body.email})
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
-  createSendToken(user, 200, res)
+  //createSendToken(user, 200, res)
+  res.status(200).json({
+    status: 'success'
+  })
 })
 
 exports.updatePassword = catchAsync(async (req, res, next) => {

@@ -3,6 +3,7 @@ const Inscript = require('../models/inscriptModel')
 const catchAsync = require('../utils/catchAsync');
 const myReport = require('../utils/reports/inscriptReport')
 const Caderneta = require('../utils/reports/caderneta')
+const factory = require('./handlerFactory')
 
 
 exports.inscreverEstudante = async (req, res, next) => {
@@ -127,3 +128,5 @@ exports.Caderneta = async (req, res, next) => {
     }
     next()
 }
+
+exports.updateStudent = factory.updateOne(Estudante)

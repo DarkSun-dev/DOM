@@ -16,6 +16,7 @@ const formadorRouter = require('./routers/formadorRoutes')
 const moduloRouter = require('./routers/moduloRoutes')
 const estudanteRouter = require('./routers/estudanteRoutes')
 const evidenciaRouter = require('./routers/evidenciaRoutes')
+const repoRouter = require('./routers/repoRoutes')
 //*ROUTAS
 
 const app = express()
@@ -45,6 +46,7 @@ app.use('/api/formador', formadorRouter)
 app.use('/api/modulo', moduloRouter)
 app.use('/api/estudante', estudanteRouter)
 app.use('/api/evidencia', evidenciaRouter)
+app.use('/api/repositorio', repoRouter)
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))

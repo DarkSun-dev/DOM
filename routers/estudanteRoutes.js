@@ -11,4 +11,5 @@ router.get('/getOne', estudanteController.getStudent)
 router.get('/inscript', estudanteController.getStudent)
 router.get('/getAll', estudanteController.getStudents)
 router.get('/getList', estudanteController.getList)
+router.patch('/updateStudent/:id', estudanteController.updateStudent)
 module.exports = router
